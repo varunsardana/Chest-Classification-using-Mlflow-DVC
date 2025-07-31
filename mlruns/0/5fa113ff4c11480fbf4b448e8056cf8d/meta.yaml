@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/varunsardana/Chest-Classification-using-Mlflow-DVC/mlruns/0/5fa113ff4c11480fbf4b448e8056cf8d/artifacts
+end_time: 1753904065139
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5fa113ff4c11480fbf4b448e8056cf8d
+run_name: wise-owl-303
+run_uuid: 5fa113ff4c11480fbf4b448e8056cf8d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753904064007
+status: 4
+tags: []
+user_id: varunsardana

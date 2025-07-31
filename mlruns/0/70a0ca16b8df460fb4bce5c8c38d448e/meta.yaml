@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/varunsardana/Chest-Classification-using-Mlflow-DVC/mlruns/0/70a0ca16b8df460fb4bce5c8c38d448e/artifacts
+end_time: 1753904533823
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 70a0ca16b8df460fb4bce5c8c38d448e
+run_name: amazing-shark-108
+run_uuid: 70a0ca16b8df460fb4bce5c8c38d448e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753904525978
+status: 4
+tags: []
+user_id: varunsardana

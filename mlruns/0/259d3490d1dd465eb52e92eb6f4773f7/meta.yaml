@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/varunsardana/Chest-Classification-using-Mlflow-DVC/mlruns/0/259d3490d1dd465eb52e92eb6f4773f7/artifacts
+end_time: 1753761676141
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 259d3490d1dd465eb52e92eb6f4773f7
+run_name: ambitious-seal-338
+run_uuid: 259d3490d1dd465eb52e92eb6f4773f7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753761674859
+status: 4
+tags: []
+user_id: varunsardana

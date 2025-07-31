@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/varunsardana/Chest-Classification-using-Mlflow-DVC/mlruns/0/be532691b6bb40f3b6f4e6d3cfbb0c44/artifacts
+end_time: 1753765227144
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: be532691b6bb40f3b6f4e6d3cfbb0c44
+run_name: unleashed-robin-410
+run_uuid: be532691b6bb40f3b6f4e6d3cfbb0c44
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753765226101
+status: 4
+tags: []
+user_id: varunsardana
