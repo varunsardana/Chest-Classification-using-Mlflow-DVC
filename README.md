@@ -12,3 +12,42 @@
 7. Update the pipeline
 8. Update the main.py
 9. Update the dvc.yaml
+
+# How to run?
+
+### STEPS:
+
+Clone the repository
+
+```bash
+https://github.com/varunsardana/Chest-Classification-using-Mlflow-DVC
+```
+### STEP 01- Create a conda environment after opening the repository
+
+```bash
+conda
+
+
+
+
+
+
+
+
+
+
+# MLFLOW TRACKING STUFF AND HOW TO USE IT
+
+os.environ['MLFLOW_TRACKING_URI'] = 'https://dagshub.com/varunsardana2006/Chest-Classification-using-Mlflow-DVC.mlflow'
+os.environ['MLFLOW_TRACKING_USERNAME'] = 'varunsardana2006'
+os.environ['MLFLOW_TRACKING_PASSWORD'] = '6c78c96e08f9f18793ebde7944e6b4017fcfa21b'
+
+
+export MLFLOW_TRACKING_URI= https://dagshub.com/varunsardana2006/Chest-Classification-using-Mlflow-DVC.mlflow
+export MLFLOW_TRACKING_USERNAME= varunsardana2006
+export MLFLOW_TRACKING_PASSWORD= 6c78c96e08f9f18793ebde7944e6b4017fcfa21b
+
+
+
+# URI- 440382805345.dkr.ecr.us-east-2.amazonaws.com/cancer
+# Region - Ohio
