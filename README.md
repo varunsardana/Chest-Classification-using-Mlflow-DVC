@@ -78,25 +78,29 @@ Docker (optional but recommended)
 1) Clone & create environment
 
    git clone https://github.com/varunsardana/Chest-Classification-using-MLflow-DVC
+   
    cd Chest-Classification-using-MLflow-DVC
+   
    conda create -n cancerenv python=3.10 -y
+   
    conda activate cancerenv
+   
    pip install -r requirements.txt
 
-2) Pull versioned data (DVC)
+3) Pull versioned data (DVC)
    Configure your DVC remote if needed (example)
    dvc remote add -d storage s3://<bucket>/<path>
    dvc remote modify storage access_key_id ...
    dvc remote modify storage secret_access_key ...
 
-3) Configure tracking (MLflow on DagsHub)
+4) Configure tracking (MLflow on DagsHub)
 	
    Set these environment variables (use a token, don’t commit it):
    export MLFLOW_TRACKING_URI=https://dagshub.com/varunsardana2006/Chest-Classification-using-MLflow-DVC
    export MLFLOW_TRACKING_USERNAME=varunsardana2006
    export MLFLOW_TRACKING_PASSWORD=<YOUR_DAGSHUB_TOKEN>
 
-4) Run the pipeline
+5) Run the pipeline
    
    python main.py
 
@@ -112,7 +116,7 @@ Docker (optional but recommended)
 Run a simple web app to upload an image and get a prediction:
 
 python app.py
-# open http://127.0.0.1:8080 (or the port printed in your console)
+open http://127.0.0.1:8080 (or the port printed in your console)
 
 
 ## ☁️ Deployment: GitHub Actions → AWS EC2 (Self‑Hosted Runner)
@@ -129,7 +133,7 @@ Install GitHub self‑hosted runner on EC2 and run as a service:
 
    sudo ./svc.sh install
    sudo ./svc.sh start
-   # or use runsvc.sh to keep the runner alive
+    or use runsvc.sh to keep the runner alive
 
 (Optional) Set a domain + Nginx reverse proxy; use Certbot for TLS.
 
