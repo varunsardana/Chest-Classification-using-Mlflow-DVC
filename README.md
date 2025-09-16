@@ -1,7 +1,8 @@
 # 🩻 Chest Cancer Classification using MLflow, DVC, Docker, and AWS
 
-This project builds an end-to-end machine learning pipeline to classify chest cancer using deep learning with VGG16. The project includes data tracking, model training, experiment logging, and automated deployment to an AWS EC2 instance using GitHub Actions.
+Overview. End‑to‑end deep‑learning pipeline to classify chest cancer using a transfer‑learned VGG16 model. The project is fully reproducible (DVC), tracked (MLflow on DagsHub), containerized (Docker), and deployable to AWS EC2 via GitHub Actions and a self‑hosted runner. A lightweight Flask app is included for prediction.
 
+Disclaimer. For education only — not for clinical use.
 ---
 
 ## 📌 Project Highlights
@@ -49,72 +50,109 @@ This project builds an end-to-end machine learning pipeline to classify chest ca
 
 ## ⚙️ ML Pipeline Overview
 
-This pipeline is organized into modular stages:
+- Data Ingestion — download a ZIP from Google Drive (config.data_ingestion.source_URL) to artifacts/data_ingestion/data.zip, unzip to artifacts/data_ingestion/, and record the dataset snapshot with DVC.
 
-1. **Data Ingestion**
-2. **Prepare Base Model (VGG16)**
-3. **Model Training**
-4. **Model Evaluation**
-5. **Prediction with Flask (optional)**
+- Prepare Base Model (VGG16) — build transfer‑learning head; optionally freeze early layers.
 
-Each stage is tracked and versioned using **DVC**.
+- Model Training — augmentation, class‑weights (if needed), callbacks; log to MLflow.
 
----
+- Model Evaluation — compute metrics, confusion matrix; log artifacts to MLflow.
 
-## 🔁 Workflow Steps
+- Serve (optional) — Flask app for /predict and a simple upload UI.
 
-1. `Update config.yaml` - base configurations
-2. `Update params.yaml` - all hyperparameters
-3. `Run training pipeline using main.py`
-4. `Track experiments using MLflow`
-5. `Push code & DVC data to GitHub`
-6. `Deployment to AWS via GitHub Actions`
+Each stage is reproducible; reruns attach to a specific dataset snapshot via DVC.
 
 ---
 
-## 🧪 Experiment Tracking with MLflow
+## 🔁 Quickstart
 
-Tracking is integrated with [DagsHub](https://dagshub.com/varunsardana2006/Chest-Classification-using-MLflow-DVC):
+Prerequisites
 
-```bash
-export MLFLOW_TRACKING_URI=https://dagshub.com/varunsardana2006/Chest-Classification-using-MLflow-DVC
-export MLFLOW_TRACKING_USERNAME=varunsardana2006
-export MLFLOW_TRACKING_PASSWORD=YOUR_TOKEN
+Python 3.10+
 
+Git, DVC (pip install dvc + your remote extra, e.g. dvc[s3])
 
-## Set Up Instructions:
-
-Clone the repo: git clone https://github.com/varunsardana/Chest-Classification-using-MLflow-DVC
-cd Chest-Classification-using-MLflow-DVC
-
-conda create -n cancerenv python=3.10 -y
-conda activate cancerenv
-pip install -r requirements.txt
-
-Pull data using DVC: dvc pull
-
-Run pipeline: python main.py
-
-🌐 Run Flask App Locally (optional)
-
-To serve predictions using a web app: python app.py
+Docker (optional but recommended)
 
 
+1) Clone & create environment
 
-## ☁️ Deployment to AWS via GitHub Actions
-The GitHub Actions workflow automatically deploys the Docker container to an EC2 instance via self-hosted runner.
+   git clone https://github.com/varunsardana/Chest-Classification-using-MLflow-DVC
+   cd Chest-Classification-using-MLflow-DVC
+   conda create -n cancerenv python=3.10 -y
+   conda activate cancerenv
+   pip install -r requirements.txt
 
-Steps already configured:
-	•	Create EC2 instance
-	•	Install Docker and self-hosted runner
-	•	Run ./run.sh inside actions-runner
-	•	GitHub Actions triggers deployment pipeline automatically
+2) Pull versioned data (DVC)
+   Configure your DVC remote if needed (example)
+   dvc remote add -d storage s3://<bucket>/<path>
+   dvc remote modify storage access_key_id ...
+   dvc remote modify storage secret_access_key ...
+
+3) Configure tracking (MLflow on DagsHub)
+	
+   Set these environment variables (use a token, don’t commit it):
+   export MLFLOW_TRACKING_URI=https://dagshub.com/varunsardana2006/Chest-Classification-using-MLflow-DVC
+   export MLFLOW_TRACKING_USERNAME=varunsardana2006
+   export MLFLOW_TRACKING_PASSWORD=<YOUR_DAGSHUB_TOKEN>
+
+4) Run the pipeline
+   
+   python main.py
+
+   Or run specific stages (if exposed under src/.../pipeline), e.g.:
+
+   python -m src.chestcancerClassifier.pipeline.stage_01_data_ingestion
+   python -m src.chestcancerClassifier.pipeline.stage_02_prepare_base_model
+   python -m src.chestcancerClassifier.pipeline.stage_03_model_trainer
+   python -m src.chestcancerClassifier.pipeline.stage_04_model_evaluation
+
+## 🌐 Flask App (Local Prediction)
+
+Run a simple web app to upload an image and get a prediction:
+
+python app.py
+# open http://127.0.0.1:8080 (or the port printed in your console)
 
 
+## ☁️ Deployment: GitHub Actions → AWS EC2 (Self‑Hosted Runner)
+
+This repo ships with a workflow that builds the Docker image and runs it on an EC2 instance using a self‑hosted runner installed on that instance.
+
+One‑time EC2 setup
+
+Launch Ubuntu EC2; open security‑group ports you need (e.g., 80/8080 for app).
+
+Install Docker and add your user to the docker group.
+
+Install GitHub self‑hosted runner on EC2 and run as a service:
+
+   sudo ./svc.sh install
+   sudo ./svc.sh start
+   # or use runsvc.sh to keep the runner alive
+
+(Optional) Set a domain + Nginx reverse proxy; use Certbot for TLS.
+
+CI/CD overview
+
+On push/PR to main, GitHub Actions:
+
+installs deps, runs tests (if present), builds Docker image
+
+on the self‑hosted runner, restarts the container with the latest image
+
+Keep sensitive values as GitHub Secrets or EC2 environment variables.
+
+If your workflow requires DagsHub credentials, pass them via env: in the job from GitHub Secrets.
 
 
+# 🧾 Dataset & Credits
 
-<img width="1466" height="791" alt="Screenshot 2025-07-31 at 7 12 01 PM" src="https://github.com/user-attachments/assets/2f63920d-ee6b-4c87-834b-b2078c98f89b" />
+Dataset: https://www.kaggle.com/datasets/mohamedhanyyy/chest-ctscan-images 
+
+Acknowledgements: TensorFlow/Keras, DVC, MLflow, DagsHub, and related OSS.
+
+
 
 
 
