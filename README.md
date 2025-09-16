@@ -33,18 +33,20 @@ Disclaimer. For education only — not for clinical use.
 
 
 .
-├── config/                         # YAML config files
-├── model/                          # Saved model weights
-├── research/                       # Test notebooks
-├── templates/                      # HTML templates (if Flask is used)
-├── src/chestcancerClassifier/     # All core components
-├── .github/workflows/             # GitHub Actions CI/CD
-├── Dockerfile                     # Docker setup
-├── app.py                         # Flask app for prediction
-├── dvc.yaml                       # DVC pipeline config
-├── mlruns/                        # MLflow run logs
-└── README.md                      # This file
-
+├── config/ # YAML config files
+├── model/ # Saved model weights / exported model
+├── research/ # Notebooks & scratch experiments
+├── templates/ # HTML templates (Flask UI)
+├── src/
+│ └── chestcancerClassifier/ # Core components (data, model, utils, pipelines)
+├── .github/workflows/ # GitHub Actions (CI/CD)
+├── Dockerfile # Docker build for train/serve
+├── app.py # Flask app for local prediction
+├── dvc.yaml # DVC pipeline config (optional)
+├── mlruns/ # Local MLflow runs (if not using remote)
+├── params.yaml # Hyperparameters & paths
+├── config.yaml # Project paths / toggles
+└── README.md
 
 ---
 
