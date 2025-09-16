@@ -157,6 +157,15 @@ Dataset: https://www.kaggle.com/datasets/mohamedhanyyy/chest-ctscan-images
 Acknowledgements: TensorFlow/Keras, DVC, MLflow, DagsHub, and related OSS.
 
 
+# Demo Screenshot
+
+
+<img width="1466" height="791" alt="Screenshot 2025-07-31 at 7 12 01 PM" src="https://github.com/user-attachments/assets/aa3bbc98-fd01-46f5-aa22-640a96d9edf5" />
+
+
+
+
+
 
 
 
