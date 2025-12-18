@@ -70,25 +70,45 @@ Each stage is reproducible; reruns attach to a specific dataset snapshot via DVC
 
 Prerequisites
 
-Python 3.10+
+- Python **3.10 or 3.11** (required — TensorFlow is not compatible with Python 3.12+)
+- Git
+- DVC (pip install dvc + your remote extra, e.g. dvc[s3])
+- Docker (optional but recommended)
 
-Git, DVC (pip install dvc + your remote extra, e.g. dvc[s3])
-
-Docker (optional but recommended)
 
 
-1) Clone & create environment
+1) Clone the repository
 
-   git clone https://github.com/varunsardana/Chest-Classification-using-MLflow-DVC
-   
-   cd Chest-Classification-using-MLflow-DVC
-   
+  ```bash
+  git clone https://github.com/varunsardana/Chest-Classification-using-MLflow-DVC
+  cd Chest-Classification-using-MLflow-DVC
+
+
+2) Create and activate a virtual environment
+   Option A: Conda (if installed)
+
    conda create -n cancerenv python=3.10 -y
-   
    conda activate cancerenv
-   
+
+
+   Option B: venv (recommended if conda is unavailable)
+
+   python3.10 -m venv .venv
+   source .venv/bin/activate
+
+
+   Install dependencies
+   pip install --upgrade pip
    pip install -r requirements.txt
 
+
+   Apple Silicon (M1 / M2 / M3) note
+
+   If TensorFlow crashes on macOS, install the Apple-maintained build:
+   pip uninstall -y tensorflow
+   pip install tensorflow-macos
+  
+  
 3) Pull versioned data (DVC)
    Configure your DVC remote if needed (example)
    dvc remote add -d storage s3://<bucket>/<path>
