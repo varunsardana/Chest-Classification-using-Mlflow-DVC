@@ -31,7 +31,7 @@ Disclaimer. For education only — not for clinical use.
 
 ## 📂 Project Structure
 
-
+```
 .
 ├── config/ # YAML config files
 ├── model/ # Saved model weights / exported model
@@ -47,7 +47,7 @@ Disclaimer. For education only — not for clinical use.
 ├── params.yaml # Hyperparameters & paths
 ├── config.yaml # Project paths / toggles
 └── README.md
-
+```
 ---
 
 ## ⚙️ ML Pipeline Overview
